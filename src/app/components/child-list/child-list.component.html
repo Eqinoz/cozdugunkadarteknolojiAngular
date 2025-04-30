@@ -1,0 +1,84 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-lg-6">
+      <!-- Section Heading-->
+      <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+        <h3>Our Creative <span> Team</span></h3>
+        <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    @for (item of childList ; track item.id) {
+      <!-- Single Advisor-->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="single_advisor_profile {{item.gender | lowercase}} wow fadeInUp" (click)="openModal(item, $event)" style="cursor: pointer" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+          <!-- Team Thumb-->
+          <div class="advisor_thumb"><img src="{{item.imageUrl}}" alt="">
+          </div>
+          <!-- Team Details-->
+          <div class="single_advisor_details_info">
+            <h6>{{item.firstName}} {{item.lastName}}</h6>
+            <p class="designation">{{item.educationStatu}}</p>
+            <!-- Detay Info-->
+<!--            <div class="detail-button">-->
+<!--              <button type="button"-->
+<!--                      class="btn btn-detail"-->
+<!--                      (click)="openModal(item, $event)">-->
+<!--                Detay-->
+<!--              </button>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
+
+<!-- MODAL: Detay ve Görev Ata -->
+<div class="modal fade" #childModal tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <h5 class="modal-title">Çocuk Detayı</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Ad:</strong> {{selectedChild?.firstName}}</p>
+        <p><strong>Okul:</strong> {{selectedChild?.educationStatu}}</p>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button class="btn btn-outline-secondary">Detay</button>
+          <button class="btn btn-primary" (click)="openTaskTypeModal()">Görev Ata</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Görev Tipi Seçimi -->
+<div class="modal fade" #taskTypeModal tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass-effect">
+      <div class="modal-header">
+        <h5 class="modal-title">Görev Tipi Seç</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          @for (task of taskList; track taskList) {
+            <li class="list-group-item list-group-item-action"
+                (click)="goToTaskPage(task)">
+              {{task.typeName}}
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,208 @@
+body{margin-top:20px;
+  background:#eee;
+}
+
+.detail-button {
+  margin-top: 10px; /* İsimle buton arasına boşluk */
+}
+
+/* Detay Butonu Stili */
+.btn-detail {
+  background-color: #ffffff;
+  color: #3f43fd;
+  border: 1px solid #3f43fd;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* Hover Efekti */
+.btn-detail:hover {
+  background-color: #3f43fd;
+  color: #ffffff;
+  cursor: pointer;
+}
+.advisor_thumb {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* Ekle */
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  position: relative; /* Ekle: Buton için relative konum sağlar */
+}
+
+.advisor_thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Resim alanı tamamen kaplasın */
+  object-position: center center; /* Resim tam ortalansın */
+}
+/* Erkek çocuklar için */
+.single_advisor_profile.boy .advisor_thumb {
+  background-color: #3f43fd; /* Mavi */
+}
+
+/* Kız çocuklar için */
+.single_advisor_profile.girl .advisor_thumb {
+  background-color: #ff69b4; /* Pembe */
+}
+
+/* Hover durumunda da */
+.single_advisor_profile.boy:hover .advisor_thumb::after,
+.single_advisor_profile.boy:focus .advisor_thumb::after {
+  background-color: #070a57; /* Erkek hover koyu mavi */
+}
+
+.single_advisor_profile.girl:hover .advisor_thumb::after,
+.single_advisor_profile.girl:focus .advisor_thumb::after {
+  background-color: #c2185b; /* Kız hover koyu pembe */
+}
+
+/* Hoverda detay alanı da değişsin */
+.single_advisor_profile.girl:hover .single_advisor_details_info,
+.single_advisor_profile.girl:focus .single_advisor_details_info {
+  background-color: #c2185b;
+}
+
+.single_advisor_profile.girl:hover .single_advisor_details_info::after,
+.single_advisor_profile.girl:focus .single_advisor_details_info::after {
+  background-color: #ffffff;
+}
+
+.single_advisor_profile.girl:hover .single_advisor_details_info h6,
+.single_advisor_profile.girl:focus .single_advisor_details_info h6,
+.single_advisor_profile.girl:hover .single_advisor_details_info p,
+.single_advisor_profile.girl:focus .single_advisor_details_info p {
+  color: #ffffff;
+}
+.single_advisor_profile {
+  position: relative;
+  margin-bottom: 50px;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  z-index: 1;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+  box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+}
+.single_advisor_profile .advisor_thumb {
+  position: relative;
+  z-index: 1;
+  border-radius: 15px 15px 0 0;
+  margin: 0 auto;
+  padding: 30px 30px 0 30px;
+  background-color: #3f43fd;
+  overflow: hidden;
+}
+.single_advisor_profile .advisor_thumb::after {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  position: absolute;
+  width: 150%;
+  height: 80px;
+  bottom: -45px;
+  left: -25%;
+  content: "";
+  background-color: #ffffff;
+  -webkit-transform: rotate(-15deg);
+  transform: rotate(-15deg);
+}
+@media only screen and (max-width: 575px) {
+  .single_advisor_profile .advisor_thumb::after {
+    height: 160px;
+    bottom: -90px;
+  }
+}
+
+.single_advisor_profile  {
+  position: relative;
+  z-index: 1;
+  padding: 30px;
+  text-align: right;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  border-radius: 0 0 15px 15px;
+  background-color: #ffffff;
+}
+.single_advisor_profile:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.single_advisor_details_info{
+  position: relative;
+  padding: 30px;
+  text-align: center; /* Ortalamak istersen */
+  background-color: #ffffff;
+  border-radius: 0 0 15px 15px;
+}
+.single_advisor_profile .single_advisor_details_info::after {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  position: absolute;
+  z-index: 1;
+  width: 50px;
+  height: 3px;
+  background-color: #3f43fd;
+  content: "";
+  top: 12px;
+  right: 30px;
+}
+.single_advisor_profile .single_advisor_details_info h6 {
+  margin-bottom: 0.25rem;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .single_advisor_profile .single_advisor_details_info h6 {
+    font-size: 14px;
+  }
+}
+.single_advisor_profile .single_advisor_details_info p {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .single_advisor_profile .single_advisor_details_info p {
+    font-size: 12px;
+  }
+}
+.single_advisor_profile:hover .advisor_thumb::after,
+.single_advisor_profile:focus .advisor_thumb::after {
+  background-color: #070a57;
+}
+
+
+.single_advisor_profile:hover .single_advisor_details_info,
+.single_advisor_profile:focus .single_advisor_details_info {
+  background-color: #070a57;
+}
+.single_advisor_profile:hover .single_advisor_details_info::after,
+.single_advisor_profile:focus .single_advisor_details_info::after {
+  background-color: #ffffff;
+}
+.single_advisor_profile:hover .single_advisor_details_info h6,
+.single_advisor_profile:focus .single_advisor_details_info h6 {
+  color: #ffffff;
+}
+.single_advisor_profile:hover .single_advisor_details_info p,
+.single_advisor_profile:focus .single_advisor_details_info p {
+  color: #ffffff;
+}
+/*Modal Css*/
+.glass-effect {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
