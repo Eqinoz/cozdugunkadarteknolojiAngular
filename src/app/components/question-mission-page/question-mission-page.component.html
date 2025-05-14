@@ -1,0 +1,75 @@
+<div class="container mt-4">
+  <form>
+    <!-- İlk Satır -->
+    @if (child){
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <input class="form-control" type="text" placeholder="" aria-label="First name" value="{{child.firstName}}" disabled>
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" type="text" placeholder="" aria-label="Last name" value="{{child.lastName}}" disabled>
+        </div>
+      </div>
+    }
+
+    <!-- İkinci Satır -->
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <select class="form-select" aria-label="Select menu">
+          <option selected>Bir Seçim Yap</option>
+          @for (item of lessons; track item.id) {
+            <option value="{{item.id}}">{{item.lessonName}}</option>
+          }
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="quantity1" class="form-label">Soru Sayısı</label>
+        <input type="number" class="form-control" id="quantity1" name="quantity" min="1" max="100" step="1" value="1">
+      </div>
+    </div>
+
+    <!-- Başarı Oranı -->
+    <div class="row mb-3">
+
+      <div class="col-md-6">
+        <label class="form-label">
+          Başarı Oranı: <strong>{{ successRate }}%</strong>
+        </label>
+
+        <input
+          type="range"
+          class="form-range"
+          min="0"
+          max="100"
+          step="5"
+          [(ngModel)]="successRate"
+          name="successRate"
+        />
+      </div>
+    </div>
+
+    <!-- Oturum Süresi -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="sessionTime" class="form-label">İzin Verilen Oturum Süresi (Dakika)</label>
+        <input type="number" class="form-control" id="sessionTime" name="sessionTime" min="1" max="100" step="1" value="1">
+      </div>
+    </div>
+
+    <!-- Açıklama -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="desc" class="form-label">Açıklama</label>
+        <textarea class="form-control" id="desc" rows="3" placeholder="Notlarınızı girin..."></textarea>
+      </div>
+    </div>
+
+    <!-- Gönder Butonu -->
+    <div class="row">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-primary">Gönder</button>
+      </div>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,106 @@
+<div class="container mt-4">
+  <form [formGroup]="missionForm">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">İsim</label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          value="{{child.firstName}}"
+          required
+          disabled
+        />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Soyisim</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          value="{{child.lastName}}"
+          required
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Görev Tanımı</label>
+      <input
+        type="text"
+        class="form-control"
+        id="missionTitle"
+        formControlName="missionTitle"
+        placeholder="Örn: Oda toplama"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Görevin Belli Bir Süresi Var mı?</label><br />
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="hasTimeLimit"
+          formControlName="hasTimeLimit"
+          [id]="true"
+          [value]="true"
+        />
+        <label class="form-check-label" for="hasTimeYes">Evet</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="hasTimeLimit"
+          [id]="false"
+          formControlName="hasTimeLimit"
+          [value]="false"
+        />
+        <label class="form-check-label" for="hasTimeNo">Hayır</label>
+      </div>
+    </div>
+
+    @if (missionForm.get("hasTimeLimit")?.value) {
+      <div class="mb-3" >
+        <label class="form-label">Görev Süresi (dakika)</label>
+        <input
+          type="number"
+          class="form-control"
+          id="missionDuration"
+          formControlName="missionDuration"
+          min="1"
+          required
+        />
+      </div>
+    }
+
+
+    <div class="mb-3">
+      <label class="form-label">Oturum Süresi (dakika)</label>
+      <input
+        type="number"
+        class="form-control"
+        id="sessionDuration"
+        formControlName="sessionDuration"
+        min="1"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Açıklama</label>
+      <textarea
+        class="form-control"
+        formControlName="missionDescription"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <button class="btn btn-primary" type="submit" (click)="submitForm()">
+      Gönder
+    </button>
+  </form>
+</div>
