@@ -61,8 +61,7 @@ export class ChildListComponent implements OnInit{
 
   goToDetail(child: Child) {
     // Detay sayfasına yönlendir
-    // this.router.navigate(['/detail', child.id]);
-    console.log('Detay sayfasına yönlendirilir:', child);
+    this.router.navigate(['/child', child.id]);
   }
 
   openTaskTypeModal() {
@@ -74,7 +73,12 @@ export class ChildListComponent implements OnInit{
   goToTaskPage(tip: any) {
     const childId = this.selectedChild.id;
     bootstrap.Modal.getInstance(this.taskTypeModal.nativeElement)?.hide();
-    this.router.navigate(['/gorev-sec', childId, tip.rota]);
+    if (tip==1){
+      this.router.navigate(['/questionmission', childId]);
+    }
+    else if (tip==2){
+      this.router.navigate(['/photomission', childId]);
+    }
   }
 
 }

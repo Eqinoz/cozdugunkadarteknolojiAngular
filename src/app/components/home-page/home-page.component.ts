@@ -22,10 +22,10 @@ export class HomePageComponent implements OnInit {
     getUserName(){
      const parentName=this.jwt.getParentName(localStorage.getItem("token"));
      if (!parentName){
-       this.welcomeMessage="Welcome to the home page!"
+       this.welcomeMessage="Ana Sayfaya Hoşgeldiniz!"
      }
      else{
-       this.welcomeMessage='Welcome to the home page,'+parentName +'!';
+       this.welcomeMessage='Ana Sayfaya Hoşgeldiniz!, Sayın '+parentName +'!';
      }
 
     }

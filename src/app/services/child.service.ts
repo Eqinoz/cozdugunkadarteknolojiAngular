@@ -26,4 +26,6 @@ export class ChildService {
   getChildById(id:number):Observable<SingleResponseModel<Child>>{
     return this.httpClient.get<SingleResponseModel<Child>>(this.apiUrl+"/GetDetailsById?id="+id);
   }
+
+
 }

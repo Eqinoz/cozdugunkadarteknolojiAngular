@@ -4,11 +4,17 @@ import {LoginPageComponent} from './components/login-page/login-page.component';
 import {RegisterPageComponent} from './components/register-page/register-page.component';
 import {ChildDetailsComponent} from './components/child-details/child-details.component';
 import {ChildRegisterComponent} from './components/child-register/child-register.component';
+import {QuestionMissionPageComponent} from './components/question-mission-page/question-mission-page.component';
+import {
+  PhotoVerificationMissionPageComponent
+} from './components/photo-verification-mission-page/photo-verification-mission-page.component';
 
 export const routes: Routes = [
   {path:"",component:HomePageComponent},
   {path:"login", component:LoginPageComponent},
   {path:"register", component:RegisterPageComponent},
   {path:"child/:id", component:ChildDetailsComponent},
-  {path:"child-register", component:ChildRegisterComponent}
+  {path:"child-register", component:ChildRegisterComponent},
+  {path:"questionmission/:id", component:QuestionMissionPageComponent},
+  {path:"photomission/:id", component:PhotoVerificationMissionPageComponent}
 ];
