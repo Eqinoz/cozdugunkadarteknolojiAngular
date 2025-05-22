@@ -1,0 +1,36 @@
+<nav class="custom-navbar">
+  @if (parentName){
+    <div class="user-name" >
+      {{ parentName }}
+    </div>
+  }
+
+
+  <div class="navbar-right">
+    <div class="auth-buttons">
+      @if (!parentName) {
+        <button class="btn btn-outline-light"  routerLink="/login">Login</button>
+        <button class="btn btn-outline-light"  routerLink="/register">Register</button>
+      } @else if (parentName){
+        <button class="btn btn-danger" (click)="logout()">Çıkış</button>
+      }
+
+
+    </div>
+
+    <div class="hamburger" (click)="toggleMenu()">
+      &#9776;
+    </div>
+  </div>
+
+  <div class="site-menu" [class.active]="menuOpen">
+    <div class="close-icon" (click)="toggleMenu()">&times;</div>
+    <div class="menu-content">
+      <ul>
+        <li><a routerLink="/" (click)="toggleMenu()">Anasayfa</a></li>
+        <li><a routerLink="/gorevler" (click)="toggleMenu()">Görevler</a></li>
+        <li><a routerLink="/iletisim" (click)="toggleMenu()">İletişim</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

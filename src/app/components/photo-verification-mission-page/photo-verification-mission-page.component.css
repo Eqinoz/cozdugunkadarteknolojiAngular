@@ -1,0 +1,80 @@
+.container {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: inherit;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0069d9;
+  box-shadow: 0 0 8px rgba(0, 105, 217, 0.25);
+}
+
+.form-check {
+  margin-right: 20px;
+}
+
+.form-check-input {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  accent-color: #0069d9; /* modern browsers için */
+}
+
+.form-check-label {
+  cursor: pointer;
+  font-size: 15px;
+  user-select: none;
+}
+
+button.btn-primary {
+  background-color: #0069d9;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 12px;
+  display: inline-block;
+}
+
+button.btn-primary:hover {
+  background-color: #004a9f;
+  transform: scale(1.05);
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 20px 15px;
+    margin: 20px;
+  }
+}

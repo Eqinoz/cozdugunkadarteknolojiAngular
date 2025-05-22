@@ -1,0 +1,152 @@
+.custom-navbar {
+  position: relative;
+  width: 100%;
+  padding: 12px 24px;
+  background-color: #009688;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #00796B;
+  z-index: 999;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hamburger {
+  font-size: 28px;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.auth-buttons .btn {
+  margin-left: 8px;
+  color: white;
+  border-color: white;
+}
+
+.auth-buttons .btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.site-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 150, 136, 0.9);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+  z-index: 998;
+}
+
+.site-menu.active {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.menu-content ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.menu-content li {
+  margin: 20px 0;
+}
+
+.menu-content a {
+  color: white;
+  font-size: 26px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.menu-content a:hover {
+  color: #c8f5f2;
+}
+
+.close-icon {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 36px;
+  color: white;
+  cursor: pointer;
+}
+/* Navbar Temel Stilleri (önceden verdiklerimle birlikte kullanılır) */
+
+.menu-content ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.menu-content li {
+  margin: 15px 0;
+}
+
+.menu-content a {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: white;
+  font-size: 22px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-content a:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* Mobil görünüm */
+@media screen and (max-width: 768px) {
+  .custom-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .menu-content a {
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+
+  .close-icon {
+    top: 16px;
+    right: 20px;
+    font-size: 32px;
+  }
+}

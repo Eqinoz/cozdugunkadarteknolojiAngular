@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {JwtService} from '../../services/jwt.service';
 import {ChildListComponent} from '../child-list/child-list.component';
+import {NavbarComponent} from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-home-page',
   imports: [
-    ChildListComponent
+    ChildListComponent,
+    NavbarComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'

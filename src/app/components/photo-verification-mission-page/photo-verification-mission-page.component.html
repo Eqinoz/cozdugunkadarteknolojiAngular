@@ -1,5 +1,6 @@
 <div class="container mt-4">
-  <form [formGroup]="missionForm">
+  @if (missionForm) {
+  <form [formGroup]="missionForm" (ngSubmit)="submitForm()">
     <div class="row mb-3">
       <div class="col-md-6">
         <label class="form-label">İsim</label>
@@ -7,7 +8,7 @@
           type="text"
           class="form-control"
           name="firstName"
-          value="{{child.firstName}}"
+          [value]="child?.firstName"
           required
           disabled
         />
@@ -18,7 +19,7 @@
           type="text"
           class="form-control"
           name="lastName"
-          value="{{child.lastName}}"
+          [value]="child?.lastName"
           required
           disabled
         />
@@ -99,8 +100,9 @@
       ></textarea>
     </div>
 
-    <button class="btn btn-primary" type="submit" (click)="submitForm()">
+    <button class="btn btn-primary" type="submit" >
       Gönder
     </button>
   </form>
+  }
 </div>

@@ -41,11 +41,11 @@ export class PhotoVerificationMissionPageComponent implements OnInit{
       childId:this.id,
       parentId:this.parentId,
       missionTitle:["",Validators.required],
-      hasTimeLimit:[false,Validators.required],
-      missionDuration:[null,Validators.required],
-      sessionDuration:[1,Validators.required],
+      hasTimeLimit:["",Validators.required],
+      missionDuration:[""],
+      sessionDuration:["",Validators.required],
       missionDescription:["",Validators.required],
-      IsApproved:true,
+      isApproved:true,
     })
 
     }
@@ -58,8 +58,9 @@ export class PhotoVerificationMissionPageComponent implements OnInit{
     getChild(id:number){
       this.childService.getChildById(id).subscribe(data=>{
         this.child=data.data;
+        this.getParentId()
       })
-      this.getParentId()
+
     }
 
 
@@ -69,6 +70,10 @@ export class PhotoVerificationMissionPageComponent implements OnInit{
     if (this.missionForm.valid){
       console.log("if içi");
       let mission= Object.assign({}, this.missionForm.value);
+      if (mission.missionDuration==""){
+        mission.missionDuration=0;
+      }
+      console.log(this.missionForm.value);
       this.photoMission.addMission(mission).subscribe({
         next:data =>this.toastr.success("Görev Eklendi"),
         error: error => this.toastr.error(error),
