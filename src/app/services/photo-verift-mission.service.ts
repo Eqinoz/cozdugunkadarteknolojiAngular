@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {ListResponseModel} from '../models/listResponseModel';
 import {PhotoVerifyMission} from '../models/photoVerifyMission';
 import {ResponseModel} from '../models/responseModel';
+import {PhotoVerifyMissionDTO} from '../models/photoVerifyMissionDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ apiUrl="https://localhost:44356/api/PhotoMission/"
 
   getMissionByChildId(id:number):Observable<ListResponseModel<PhotoVerifyMission>>{
   return  this.httpClient.get<ListResponseModel<PhotoVerifyMission>>(this.apiUrl+"GetDetailsByChildId?id="+id);
+  }
+  getMissionDetailByChildId(id:number):Observable<ListResponseModel<PhotoVerifyMissionDTO>>{
+  return this.httpClient.get<ListResponseModel<PhotoVerifyMissionDTO>>(this.apiUrl+"GetDetailsByChildId?id="+id);
   }
   addMission(mission:PhotoVerifyMission):Observable<ResponseModel>{
   return this.httpClient.post<ResponseModel>(this.apiUrl+"AddPhotoMission", mission);

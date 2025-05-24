@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <h3>Merhaba {{child?.firstName}}, Görevlerin:</h3>
+
+  <button class="btn btn-outline-danger mt-3" (click)="openLogoutModal()">
+    Çıkış Yap
+  </button>
+
+  <!-- Logout Modal -->
+  <div class="modal fade" #logoutModal tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-effect">
+        <div class="modal-header">
+          <h5 class="modal-title">Çıkış Yap</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Lütfen çıkış yapmak için şifrenizi giriniz:</p>
+          <input type="password" [(ngModel)]="exitPassword" class="form-control" placeholder="Şifre">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+          <button type="button" class="btn btn-danger" (click)="confirmLogout()">Çıkış Yap</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (missions.length===0) {
+    <div class="alert alert-info mt-3">
+      Henüz atanmış bir görevin yok.
+    </div>
+  }
+
+
+  <div class="row mt-3">
+    @for(mission of missions; track mission.id){
+      <div class="col-md-6">
+        <div class="card mb-3" (click)="goToMission(mission)" style="cursor: pointer;">
+          <div class="card-body">
+            <h5 class="card-title">{{mission.title}}</h5>
+            <p class="card-text">{{mission.description}}</p>
+            <small class="text-muted">
+              Görev Tipi: {{mission.type === 'question' ? 'Test Çözme' : 'Fotoğraf Doğrulama'}}
+              — Süre: {{mission.duration || 'Belirtilmemiş'}} dk
+            </small>
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>

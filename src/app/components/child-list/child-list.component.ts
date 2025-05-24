@@ -24,6 +24,7 @@ export class ChildListComponent implements OnInit{
   parentId:number;
   childList:any[];
   selectedChild:Child|null;
+  selectedChildId: number | null = null;
   private modalInstance: any;
   taskList:MissionType[];
 
@@ -35,7 +36,25 @@ export class ChildListComponent implements OnInit{
         this.getChildList(this.parentId)
       this.missionService.getMissionType().subscribe(res=>{this.taskList=res.data})
 
+      const active = localStorage.getItem('activeChild');
+      if (active) {
+        const parsed = JSON.parse(active);
+        this.selectedChildId = parsed.id;
+      }
+
     }
+
+  selectChild(child: Child) {
+    localStorage.setItem('activeChild', JSON.stringify(child));
+    this.toastr.success(`${child.firstName} cihazla eşleştirildi`);
+    this.selectedChildId = child.id;
+  }
+  isActiveChild(child: Child): boolean {
+    const active = localStorage.getItem('activeChild');
+    if (!active) return false;
+    const parsed = JSON.parse(active);
+    return parsed.id === child.id;
+  }
 
     getChildList(id:number){
       this.childService.getChildByParentId(id).subscribe(data =>

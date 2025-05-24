@@ -38,6 +38,13 @@ export class JwtService {
     }
     return null;
   }
+  getParentEmail(token:string):string{
+    const decodeToken = this.decodeToken(token);
+    if (decodeToken) {
+      return decodeToken["email"]
+    }
+    return null;
+  }
 
   private decodeUtf8(text: string): string {
     try {

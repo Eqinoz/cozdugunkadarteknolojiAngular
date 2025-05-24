@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {NgClass} from '@angular/common';
 import {JwtService} from '../../services/jwt.service';
 
 @Component({
   selector: 'app-navbar',
   imports: [
     RouterLink,
-    NgClass
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'

@@ -23,14 +23,19 @@
           <div class="single_advisor_details_info">
             <h6>{{item.firstName}} {{item.lastName}}</h6>
             <p class="designation">{{item.educationStatu}}</p>
-            <!-- Detay Info-->
-<!--            <div class="detail-button">-->
-<!--              <button type="button"-->
-<!--                      class="btn btn-detail"-->
-<!--                      (click)="openModal(item, $event)">-->
-<!--                Detay-->
-<!--              </button>
-            </div>-->
+
+            <!-- Bu cihazla eşleştir butonu -->
+            <button class="btn btn-outline-success btn-sm mt-2" (click)="selectChild(item)">
+              <i class="fa fa-link"></i> Bu Cihazla Eşleştir
+            </button>
+
+            <!-- Eğer zaten eşleştirildiyse belirt -->
+            @if (isActiveChild(item)) {
+              <div  class="text-success mt-1">
+                <i class="fa fa-check-circle"></i> Bu cihazla eşleşti
+              </div>
+            }
+
           </div>
         </div>
       </div>

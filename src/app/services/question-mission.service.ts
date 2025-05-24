@@ -4,6 +4,7 @@ import {QuestionMission} from '../models/questionMission';
 import {Observable} from 'rxjs';
 import {ResponseModel} from '../models/responseModel';
 import {ListResponseModel} from '../models/listResponseModel';
+import {QuestionMissionDTO} from '../models/questionMissionDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,9 @@ apiUrl="https://localhost:44356/api/QuestionMission/"
   }
   getMissionByChildId(id:number):Observable<ListResponseModel<QuestionMission>>{
     return this.httpClient.get<ListResponseModel<QuestionMission>>(this.apiUrl+"GetDetailsByChildId?id="+id);
+  }
+
+  getMissionDetailByChildId(id:number):Observable<ListResponseModel<QuestionMissionDTO>>{
+  return this.httpClient.get<ListResponseModel<QuestionMissionDTO>>(this.apiUrl+"GetDetailsByChildId?id="+id);
   }
 }
