@@ -1,0 +1,62 @@
+@if (!started && !loading){
+  <div class="container my-5" >
+    <h2 class="mb-4">📝 Görev Detayları</h2>
+    @if (missionDetails){
+      <div class="card p-4 shadow" >
+        <p><strong>Görev Adı:</strong> {{ missionDetails.schoolLessonName }} Test Çözümü</p>
+        <p><strong>Açıklama:</strong> {{ missionDetails.description }}</p>
+        <p><strong>Hedef Soru Sayısı:</strong> {{ missionDetails.numberOfQuestion }}</p>
+        <!-- Daha fazla bilgi varsa buraya ekle -->
+        <button class="btn btn-primary mt-3" (click)="startMission()">Başla</button>
+      </div>
+    }
+
+  </div>
+}
+
+
+<!-- Yükleniyor ekranı -->
+@if (loading){
+  <div class="text-center mt-5" >
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-3">Sorular yükleniyor...</p>
+  </div>
+}
+
+
+<!-- Test ekranı -->
+@if (started && !loading){
+  <div>
+    @if (currentQuestionIndex<questions?.length){
+      <div>
+        <div class="container my-5">
+          <h4 class="mb-4">Soru {{ currentQuestionIndex + 1 }} / {{ questions.length }}</h4>
+          <div class="card shadow p-4">
+            <p class="fs-5">{{ questions[currentQuestionIndex].questionText }}</p>
+            <div class="btn-group-vertical w-100">
+              @for (opt of questions[currentQuestionIndex].options;track trackFn){
+                <button
+                        (click)="answer(opt)"
+                        [class.btn-success]="selectedOption === opt && opt === questions[currentQuestionIndex].correctAnswer"
+                        [class.btn-danger]="selectedOption === opt && opt !== questions[currentQuestionIndex].correctAnswer"
+                        class="btn btn-outline-primary mb-2">
+                  {{ opt }}
+                </button>
+              }
+
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (currentQuestionIndex >= questions?.length) {
+      <div class="text-center mt-5">
+        <h3>✔️ Test Tamamlandı</h3>
+        <p>Doğru Sayısı: {{ score }} / {{ questions.length }}</p>
+      </div>
+    }
+
+  </div>
+}
+

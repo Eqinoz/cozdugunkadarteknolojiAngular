@@ -23,4 +23,7 @@ apiUrl="https://localhost:44356/api/QuestionMission/"
   getMissionDetailByChildId(id:number):Observable<ListResponseModel<QuestionMissionDTO>>{
   return this.httpClient.get<ListResponseModel<QuestionMissionDTO>>(this.apiUrl+"GetDetailsByChildId?id="+id);
   }
+  getMissionById(id:number):Observable<ListResponseModel<QuestionMissionDTO>>{
+  return this.httpClient.get<ListResponseModel<QuestionMissionDTO>>(this.apiUrl+"GetDetailsByMissionId?id="+id);
+  }
 }

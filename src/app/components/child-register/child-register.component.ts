@@ -4,6 +4,7 @@ import {ChildService} from '../../services/child.service';
 import {ToastrService} from 'ngx-toastr';
 import {JwtService} from '../../services/jwt.service';
 import {SchoolService} from '../../services/school.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-child-register',
@@ -20,7 +21,7 @@ export class ChildRegisterComponent implements  OnInit{
 
   constructor(private formBuilder: FormBuilder,private childRegister:ChildService,
               private toastr:ToastrService,private jwtService: JwtService,
-              private schoolService: SchoolService) {
+              private schoolService: SchoolService, private location:Location) {
   }
     ngOnInit(): void {
       this.getParentId();
@@ -60,6 +61,10 @@ export class ChildRegisterComponent implements  OnInit{
       next: data => this.schoolName=data.data,
       error: error => console.log(error)
     })
+    }
+
+    goBack():void{
+      this.location.back();
     }
 
 }

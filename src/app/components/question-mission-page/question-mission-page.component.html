@@ -1,80 +1,56 @@
-<div class="container mt-4">
-  <form [formGroup]="missionForm">
-    <!-- İlk Satır -->
-    @if (child){
-      <div class="row mb-3">
-        <div class="col-md-3">
-          <label for="quantity1" class="form-label">İsim</label>
-          <input class="form-control" type="text" placeholder="" aria-label="First name" value="{{child.firstName}}" disabled>
+<section class="vh-100 bg-light d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow-lg rounded-4 p-4">
+          <h3 class="mb-4 text-center fw-bold text-primary">Görev Atama Paneli</h3>
+
+          <form [formGroup]="missionForm" (ngSubmit)="sendMission()">
+            <div class="mb-3">
+              <label for="schoolLessonId" class="form-label">Ders Seç</label>
+              <select formControlName="schoolLessonId" class="form-select">
+                <option selected disabled value="">Ders Seçin</option>
+                @for (lesson of lessons; track lesson.id) {
+                  <option [value]="lesson.id">{{ lesson.lessonName }}</option>
+                }
+
+              </select>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Soru Sayısı</label>
+                <input type="number" class="form-control" formControlName="numberOfQuestion" min="1">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Başarı Oranı (%)</label>
+                <input type="number" class="form-control" formControlName="successRate" min="0" max="100">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Süre (dk)</label>
+                <input type="number" class="form-control" formControlName="allowedTime" min="1">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Açıklama</label>
+                <input type="text" class="form-control" formControlName="description">
+              </div>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+              <button class="btn btn-outline-secondary" type="button" (click)="goBack()">
+                <i class="bi bi-arrow-left"></i> Geri
+              </button>
+              <button class="btn btn-primary" type="submit" [disabled]="!missionForm.valid">
+                Görevi Oluştur
+              </button>
+            </div>
+          </form>
+
         </div>
-        <div class="col-md-3">
-          <label for="quantity1" class="form-label">Soyisim</label>
-          <input class="form-control" type="text" placeholder="" aria-label="Last name" value="{{child.lastName}}" disabled>
-        </div>
-      </div>
-    }
-
-    <!-- İkinci Satır -->
-    <div class="row mb-3">
-      @if (lessons) {
-        <div class="col-md-3">
-          <label for="quantity1" class="form-label">Ders Seçimi</label>
-          <select class="form-select" aria-label="Select menu" formControlName="schoolLessonId">
-            <option selected>Bir Seçim Yap</option>
-            @for (item of lessons; track item.id) {
-              <option value="{{item.id}}" >{{item.lessonName}}</option>
-            }
-          </select>
-        </div>
-      }
-      <div class="col-md-3">
-        <label for="quantity1" class="form-label">Soru Sayısı</label>
-        <input type="number" formControlName="numberOfQuestion" class="form-control" id="quantity1" name="quantity" min="1" max="100" step="1" value="1">
       </div>
     </div>
-
-    <!-- Başarı Oranı -->
-    <div class="row mb-3">
-
-      <div class="col-md-6">
-        <label class="form-label">
-          Başarı Oranı: <strong>{{ missionForm.get('successRate')?.value }}%</strong>
-        </label>
-
-        <input
-          type="range"
-          class="form-range"
-          formControlName="successRate"
-          min="0"
-          max="100"
-          step="5"
-          name="successRate"
-        />
-      </div>
-    </div>
-
-    <!-- Oturum Süresi -->
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="sessionTime" class="form-label">İzin Verilen Oturum Süresi (Dakika)</label>
-        <input type="number"  class="form-control" id="sessionTime"  formControlName="allowedTime"  min="1" max="100" step="1" value="1">
-      </div>
-    </div>
-
-    <!-- Açıklama -->
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="desc" class="form-label">Açıklama</label>
-        <textarea class="form-control" formControlName="description" id="desc" rows="3" placeholder="Notlarınızı girin..."></textarea>
-      </div>
-    </div>
-
-    <!-- Gönder Butonu -->
-    <div class="row">
-      <div class="col-md-6">
-        <button type="submit" class="btn btn-primary" (click)="sendMission()">Gönder</button>
-      </div>
-    </div>
-  </form>
-</div>
-
+  </div>
+</section>

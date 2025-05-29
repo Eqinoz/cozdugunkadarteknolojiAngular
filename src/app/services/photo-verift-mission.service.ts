@@ -19,6 +19,9 @@ apiUrl="https://localhost:44356/api/PhotoMission/"
   getMissionDetailByChildId(id:number):Observable<ListResponseModel<PhotoVerifyMissionDTO>>{
   return this.httpClient.get<ListResponseModel<PhotoVerifyMissionDTO>>(this.apiUrl+"GetDetailsByChildId?id="+id);
   }
+  getMissionById(id:number):Observable<ListResponseModel<PhotoVerifyMissionDTO>>{
+  return this.httpClient.get<ListResponseModel<PhotoVerifyMissionDTO>>(this.apiUrl+"GetMissionById?id="+id);
+  }
   addMission(mission:PhotoVerifyMission):Observable<ResponseModel>{
   return this.httpClient.post<ResponseModel>(this.apiUrl+"AddPhotoMission", mission);
   }

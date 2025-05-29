@@ -2,72 +2,57 @@
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+        <div class="card shadow-2-strong card-registration">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Child Register</h3>
-            <form [formGroup]="childRegisterForm">
+            <button class="back-button" (click)="goBack()">
+              ← Geri
+            </button>
+            <h3 class="mb-4 text-center text-white">👧 Çocuk Kayıt</h3>
+            <form [formGroup]="childRegisterForm" (ngSubmit)="addChild()">
 
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="firstName" formControlName="firstName" class="form-control form-control-lg"/>
-                    <label class="form-label" for="firstName">First Name</label>
-                  </div>
-
+                  <label class="form-label text-white" for="firstName">Ad</label>
+                  <input type="text" id="firstName" formControlName="firstName" class="form-control"/>
                 </div>
+
                 <div class="col-md-6 mb-4">
-
-                  <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="lastName" formControlName="lastName" class="form-control form-control-lg"/>
-                    <label class="form-label" for="lastName">Last Name</label>
-                  </div>
-
+                  <label class="form-label text-white" for="lastName">Soyad</label>
+                  <input type="text" id="lastName" formControlName="lastName" class="form-control"/>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-6 mb-4">
+              <div class="mb-4">
+                <label class="form-label d-block text-white">Cinsiyet:</label>
 
-                  <h6 class="mb-2 pb-1">Gender: </h6>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" formControlName="gender" type="radio" id="girl" value="girl" checked />
+                  <label class="form-check-label" for="girl">Kız</label>
+                </div>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" formControlName="gender" type="radio" name="gender" id="girl"
-                           value="girl" checked/>
-                    <label class="form-check-label" for="girl">Kız</label>
-                  </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" formControlName="gender" type="radio" id="boy" value="boy" />
+                  <label class="form-check-label" for="boy">Erkek</label>
+                </div>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" formControlName="gender" type="radio" name="gender" id="boy"
-                           value="boy"/>
-                    <label class="form-check-label" for="boy">Erkek</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" formControlName="gender" type="radio" name="gender" id="other"
-                           value="other"/>
-                    <label class="form-check-label" for="other">Belirtmek İstemiyorum</label>
-                  </div>
-
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" formControlName="gender" type="radio" id="other" value="other" />
+                  <label class="form-check-label" for="other">Belirtmek İstemiyorum</label>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-12">
-
-                  <select formControlName="educationStatu" class="select form-control-lg">
-                    <option selected disabled>Öğrenim Durumu</option>
-                    @for (item of schoolName; track schoolName.keys()) {
-                      <option value="{{item.schoolName}}">{{ item.schoolName }}</option>
-                    }
-                  </select>
-                  <label class="form-label select-label">Öğrenim Durumu</label>
-
-                </div>
+              <div class="mb-4">
+                <label class="form-label text-white">Öğrenim Durumu</label>
+                <select formControlName="educationStatu" class="form-control">
+                  <option selected disabled>Öğrenim Durumu Seçin</option>
+                  @for (item of schoolName; track schoolName.keys()) {
+                    <option value="{{item.schoolName}}">{{ item.schoolName }}</option>
+                  }
+                </select>
               </div>
 
-              <div class="mt-4 pt-2">
-                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Submit"
-                       (click)="addChild()"/>
+              <div class="text-center">
+                <button class="btn btn-primary btn-lg" type="submit">👦 Kayıt Ol</button>
               </div>
 
             </form>

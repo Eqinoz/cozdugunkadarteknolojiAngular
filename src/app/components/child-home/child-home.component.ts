@@ -60,6 +60,14 @@ export class ChildHomeComponent implements OnInit{
         if (res.success==true){
           localStorage.removeItem('activeChild');
           this.toastr.success("Çocuk Oturumundan Çıkıldı");
+          // Modalı gizler
+          bootstrap.Modal.getInstance(this.logoutModal.nativeElement)?.hide();
+
+          //  Modala ait css temizler
+          document.body.classList.remove('modal-open');
+          const backdrops = document.querySelectorAll('.modal-backdrop');
+          backdrops.forEach(b => b.remove());
+
           this.router.navigate(['/']);
         }else {
           this.toastr.error("Şifre Yanlış")
@@ -101,9 +109,9 @@ export class ChildHomeComponent implements OnInit{
 
     goToMission(mission:any){
     if (mission.type==="question"){
-      this.router.navigate(['/questionmission'],mission.id);
+      this.router.navigate(['/child/questionmission',mission.id]);
     }else if(mission.type==="photo"){
-      this.router.navigate(['/photomission'],mission.id);
+      this.router.navigate(['/child/photomission',mission.id]);
     }
 
     }

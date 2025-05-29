@@ -7,6 +7,8 @@ import {LowerCasePipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {MissionService} from '../../services/mission.service';
 import {MissionType} from '../../models/missionType';
+import {PhotoVeriftMissionService} from '../../services/photo-verift-mission.service';
+import {QuestionMissionService} from '../../services/question-mission.service';
 
 declare var bootstrap: any;
 
@@ -27,9 +29,11 @@ export class ChildListComponent implements OnInit{
   selectedChildId: number | null = null;
   private modalInstance: any;
   taskList:MissionType[];
+  missionCounts = new Map<number, number>();
 
   constructor(private jwtService:JwtService,private toastr:ToastrService,private childService:ChildService,
-              private router:Router, private missionService:MissionService) {
+              private router:Router, private missionService:MissionService,
+              private questionMissionService:QuestionMissionService, private photoMissionService:PhotoVeriftMissionService) {
   }
     ngOnInit(): void {
         this.parentId=this.jwtService.getParentId(localStorage.getItem('token'));
@@ -57,13 +61,12 @@ export class ChildListComponent implements OnInit{
   }
 
     getChildList(id:number){
-      this.childService.getChildByParentId(id).subscribe(data =>
-      this.childList=data.data);
+      this.childService.getChildByParentId(id).subscribe(data =>{
+          this.childList=data.data
+        this.loadMissionGetAll();
+      });
+    }
 
-    }
-    getChildId(id:number){
-        this.router.navigate(['/child/'+id]);
-    }
 
   openModal(child: Child, event: MouseEvent) {
     event.stopPropagation();
@@ -79,6 +82,14 @@ export class ChildListComponent implements OnInit{
   }
 
   goToDetail(child: Child) {
+    // Modalı gizle (önlem olarak)
+    bootstrap.Modal.getInstance(this.childModal.nativeElement)?.hide();
+
+    // ✨ Modal'a ait stilleri temizle
+    document.body.classList.remove('modal-open');
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(b => b.remove());
+
     // Detay sayfasına yönlendir
     this.router.navigate(['/child', child.id]);
   }
@@ -98,6 +109,27 @@ export class ChildListComponent implements OnInit{
     else if (tip==2){
       this.router.navigate(['/photomission', childId]);
     }
+  }
+
+  loadMissionGetAll(){
+    this.childList.forEach(child => {
+      let total = 0;
+
+      //Soru Görevlerini Getir
+      this.questionMissionService.getMissionByChildId(child.id).subscribe(qRes =>{
+        const activeQuestion = qRes.data.filter(q => q.isApproved);
+        total += activeQuestion.length;
+
+        //fotoğraflı Görevleri Getir
+        this.photoMissionService.getMissionByChildId(child.id).subscribe(pRes => {
+          const activePhoto = pRes.data.filter(p => p.isApproved);
+          total+=activePhoto.length;
+
+          this.missionCounts.set(child.id, total);
+        })
+
+      })
+    })
   }
 
 }

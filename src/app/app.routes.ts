@@ -9,6 +9,8 @@ import {
   PhotoVerificationMissionPageComponent
 } from './components/photo-verification-mission-page/photo-verification-mission-page.component';
 import {ChildHomeComponent} from './components/child-home/child-home.component';
+import {ChildPhotoMissionComponent} from './components/child-photo-mission/child-photo-mission.component';
+import {ChildQuestionMissionComponent} from './components/child-question-mission/child-question-mission.component';
 
 export const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -18,5 +20,7 @@ export const routes: Routes = [
   {path:"child-register", component:ChildRegisterComponent},
   {path:"questionmission/:id", component:QuestionMissionPageComponent},
   {path:"photomission/:id", component:PhotoVerificationMissionPageComponent},
-  {path:"child-home", component:ChildHomeComponent}
+  {path:"child-home", component:ChildHomeComponent},
+  {path:"child/photomission/:id", component:ChildPhotoMissionComponent},
+  {path:"child/questionmission/:id", component:ChildQuestionMissionComponent}
 ];

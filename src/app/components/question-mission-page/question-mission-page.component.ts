@@ -37,11 +37,13 @@ export class QuestionMissionPageComponent implements OnInit {
         console.log("İd:",this.id);
         this.getChild(this.id)
 
-      this.missionForm.get('successRate')?.valueChanges.subscribe(value => {
-        this.successRate = value;
-      });
+
 
     }
+
+  goBack() {
+    window.history.back();
+  }
 
     createQuestionMissionForm(){
       this.missionForm = this.formBuilder.group({
@@ -69,6 +71,10 @@ export class QuestionMissionPageComponent implements OnInit {
   getParentId(){
     this.parentId=this.jwtService.getParentId(localStorage.getItem('token'));
     this.createQuestionMissionForm();
+
+    this.missionForm.get('successRate')?.valueChanges.subscribe(value => {
+      this.successRate = value;
+    });
   }
 
     getLesson(lessonName:string){

@@ -1,67 +1,23 @@
-.container {
-  background: #f9f9f9;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 40px;
+body {
+  background-color: #f8f9fa;
 }
 
-form label {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 6px;
-  display: inline-block;
-}
-
-form input[type="text"],
-form input[type="number"],
-form select,
-form textarea {
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-form input:focus,
-form select:focus,
-form textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-  outline: none;
-}
-
-.form-range {
-  accent-color: #007bff;
-  width: 100%;
-}
-
-button[type="submit"] {
-  background-color: #007bff;
+.card {
+  background: white;
   border: none;
-  padding: 12px 24px;
-  font-size: 16px;
+}
+
+.form-control,
+.form-select {
   border-radius: 10px;
-  color: white;
+  padding: 10px;
+}
+
+.btn {
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+h3 {
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
-  transform: scale(1.03);
-}
-
-/* Mobil uyum */
-@media (max-width: 768px) {
-  .container {
-    padding: 20px;
-  }
-
-  .row .col-md-3,
-  .row .col-md-6 {
-    width: 100%;
-    margin-bottom: 12px;
-  }
 }

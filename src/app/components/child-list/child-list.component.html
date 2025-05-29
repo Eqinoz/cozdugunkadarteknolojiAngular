@@ -24,6 +24,18 @@
             <h6>{{item.firstName}} {{item.lastName}}</h6>
             <p class="designation">{{item.educationStatu}}</p>
 
+            <div class="mt-2">
+  <span class="badge bg-warning text-dark">
+    <i class="fa fa-tasks"></i>
+    Aktif Görev:
+    @if (missionCounts.has(item.id)) {
+      {{ missionCounts.get(item.id) }}
+    } @else {
+      <span class="spinner-border spinner-border-sm"></span>
+    }
+  </span>
+            </div>
+
             <!-- Bu cihazla eşleştir butonu -->
             <button class="btn btn-outline-success btn-sm mt-2" (click)="selectChild(item)">
               <i class="fa fa-link"></i> Bu Cihazla Eşleştir
