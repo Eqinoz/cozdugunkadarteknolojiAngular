@@ -85,7 +85,7 @@ export class ChildListComponent implements OnInit{
     // Modalı gizle (önlem olarak)
     bootstrap.Modal.getInstance(this.childModal.nativeElement)?.hide();
 
-    // ✨ Modal'a ait stilleri temizle
+    // Modal'a ait stilleri temizle
     document.body.classList.remove('modal-open');
     const backdrops = document.querySelectorAll('.modal-backdrop');
     backdrops.forEach(b => b.remove());
@@ -122,7 +122,7 @@ export class ChildListComponent implements OnInit{
 
         //fotoğraflı Görevleri Getir
         this.photoMissionService.getMissionByChildId(child.id).subscribe(pRes => {
-          const activePhoto = pRes.data.filter(p => p.isApproved);
+          const activePhoto = pRes.data.filter(p => !p.isApproved);
           total+=activePhoto.length;
 
           this.missionCounts.set(child.id, total);

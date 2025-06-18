@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
+import {Router,} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'

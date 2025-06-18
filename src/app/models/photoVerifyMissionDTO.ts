@@ -11,6 +11,7 @@ export interface PhotoVerifyMissionDTO{
   sessionDuration:number;
   missionDescription:string;
   photoUrl:string;
+  success:boolean;
   isApproved:boolean;
 
 }

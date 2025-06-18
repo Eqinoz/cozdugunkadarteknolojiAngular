@@ -67,7 +67,7 @@ export class PhotoVerificationMissionPageComponent implements OnInit{
   submitForm() {
     console.log(this.missionForm.value);
     console.log("if dışı");
-    if (this.missionForm.valid){
+    if (this.missionForm){
       console.log("if içi");
       let mission= Object.assign({}, this.missionForm.value);
       if (mission.missionDuration==""){

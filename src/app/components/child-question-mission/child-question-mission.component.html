@@ -37,8 +37,8 @@
               @for (opt of questions[currentQuestionIndex].options;track trackFn){
                 <button
                         (click)="answer(opt)"
-                        [class.btn-success]="selectedOption === opt && opt === questions[currentQuestionIndex].correctAnswer"
-                        [class.btn-danger]="selectedOption === opt && opt !== questions[currentQuestionIndex].correctAnswer"
+                        [class.btn-success]="selectedOption === opt && opt === getCorrectAnswerText()"
+                        [class.btn-danger]="selectedOption === opt && opt !== getCorrectAnswerText()"
                         class="btn btn-outline-primary mb-2">
                   {{ opt }}
                 </button>
@@ -53,6 +53,8 @@
     @if (currentQuestionIndex >= questions?.length) {
       <div class="text-center mt-5">
         <h3>✔️ Test Tamamlandı</h3>
+        <p>İstenilen Başarı Oranı: {{missionDetails.successRate}}</p>
+        <p>{{message}}</p>
         <p>Doğru Sayısı: {{ score }} / {{ questions.length }}</p>
       </div>
     }

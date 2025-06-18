@@ -5,6 +5,8 @@ import {ListResponseModel} from '../models/listResponseModel';
 import {PhotoVerifyMission} from '../models/photoVerifyMission';
 import {ResponseModel} from '../models/responseModel';
 import {PhotoVerifyMissionDTO} from '../models/photoVerifyMissionDTO';
+import {SingleResponseModel} from '../models/singleResponseModel';
+import {PhotoMissionCompletionDTO} from '../models/PhotoMissionCompletionDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,11 @@ apiUrl="https://localhost:44356/api/PhotoMission/"
   }
   addMission(mission:PhotoVerifyMission):Observable<ResponseModel>{
   return this.httpClient.post<ResponseModel>(this.apiUrl+"AddPhotoMission", mission);
+  }
+  updateMission(id:number):Observable<ResponseModel>{
+  return this.httpClient.get<ResponseModel>(this.apiUrl+"Update?id="+id);
+  }
+  missionSuccessByMissionId(id:number):Observable<SingleResponseModel<PhotoMissionCompletionDTO>>{
+    return this.httpClient.get<SingleResponseModel<PhotoMissionCompletionDTO>>(this.apiUrl+"UploadMissionSuccess?id="+id)
   }
 }

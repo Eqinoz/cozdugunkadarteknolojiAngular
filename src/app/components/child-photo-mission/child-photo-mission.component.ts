@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {PhotoVeriftMissionService} from '../../services/photo-verift-mission.service';
 import {PhotoVerifyMissionDTO} from '../../models/photoVerifyMissionDTO';
+import {PhotoMissionCompletionService} from '../../services/photo-mission-completion.service';
 
 @Component({
   selector: 'app-child-photo-mission',
@@ -22,17 +23,26 @@ export class ChildPhotoMissionComponent implements OnInit {
   cameraOpen = false;
   description = '';
   missionId: number;
+  child:any;
 
   mission: any;
 
   constructor(private location: Location, private route: ActivatedRoute,
-  private photoMissionService:PhotoVeriftMissionService, private toastr: ToastrService,) {}
+  private photoMissionService:PhotoVeriftMissionService, private toastr: ToastrService,
+              private completionService:PhotoMissionCompletionService) {}
 
   ngOnInit() {
 
   this.route.params.subscribe(params => {
     this.missionId = +params['id'];
     this.getMissionDetails(this.missionId);
+
+    const childJson = localStorage.getItem("activeChild");
+    if (childJson) {
+      this.child = JSON.parse(childJson);
+    }else {
+      this.toastr.error("Could not find child");
+    }
   })
   }
 
@@ -64,6 +74,12 @@ export class ChildPhotoMissionComponent implements OnInit {
     }).catch(err => {
       alert("Kamera açılamadı: " + err);
     });
+  }
+
+  changeMissionStatus(id:number) {
+    this.photoMissionService.updateMission(id).subscribe({
+      next: response => {this.toastr.success(response.message)}
+    })
   }
 
   closeCamera() {
@@ -98,10 +114,20 @@ export class ChildPhotoMissionComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('photo', this.selectedFile);
-    formData.append('description', this.description);
+    formData.append('missionDescription', this.description);
+    formData.append('childId', this.child.id.toString());
+    formData.append('missionId',this.missionId.toString());
 
-    // TODO: API'ye gönder
-    console.log("FormData:", formData);
-    alert("Fotoğraf gönderildi!");
+    this.completionService.uploadMissionPhoto(formData).subscribe({
+      next: response => {
+        this.toastr.success("Fotoğraf Başarıyla Eklendi");
+        this.changeMissionStatus(this.missionId);
+        this.goBack();
+      },
+      error: err => {
+        this.toastr.error("Fotoğraf Yükelenemedi");
+        console.log(err);
+      }
+    })
   }
 }

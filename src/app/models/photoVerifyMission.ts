@@ -10,5 +10,6 @@ export interface PhotoVerifyMission {
   sessionDuration:number,
   missionDescription:string,
   photoUrl:string,
+  success:boolean;
   isApproved:boolean,
 }

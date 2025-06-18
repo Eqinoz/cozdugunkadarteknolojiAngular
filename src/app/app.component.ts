@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const activeChild = localStorage.getItem('activeChild');
+    const token = localStorage.getItem('token');
 
     if (activeChild) {
       const currentUrl = this.router.url;
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
       !currentUrl.includes("child-register")) {
         this.router.navigate(['/child-home']);
       }
+    }
+
+    if (token){
+
     }
   }
 

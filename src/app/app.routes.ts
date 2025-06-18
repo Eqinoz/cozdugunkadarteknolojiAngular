@@ -11,15 +11,16 @@ import {
 import {ChildHomeComponent} from './components/child-home/child-home.component';
 import {ChildPhotoMissionComponent} from './components/child-photo-mission/child-photo-mission.component';
 import {ChildQuestionMissionComponent} from './components/child-question-mission/child-question-mission.component';
+import {loginGuard} from './guards/login.guard';
 
 export const routes: Routes = [
-  {path:"",component:HomePageComponent},
+  {path:"",component:HomePageComponent,canActivate:[loginGuard]},
   {path:"login", component:LoginPageComponent},
   {path:"register", component:RegisterPageComponent},
-  {path:"child/:id", component:ChildDetailsComponent},
-  {path:"child-register", component:ChildRegisterComponent},
-  {path:"questionmission/:id", component:QuestionMissionPageComponent},
-  {path:"photomission/:id", component:PhotoVerificationMissionPageComponent},
+  {path:"child/:id", component:ChildDetailsComponent,canActivate:[loginGuard]},
+  {path:"child-register", component:ChildRegisterComponent,canActivate:[loginGuard]},
+  {path:"questionmission/:id", component:QuestionMissionPageComponent,canActivate:[loginGuard]},
+  {path:"photomission/:id", component:PhotoVerificationMissionPageComponent,canActivate:[loginGuard]},
   {path:"child-home", component:ChildHomeComponent},
   {path:"child/photomission/:id", component:ChildPhotoMissionComponent},
   {path:"child/questionmission/:id", component:ChildQuestionMissionComponent}

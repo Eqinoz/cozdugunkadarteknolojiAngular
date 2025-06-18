@@ -21,6 +21,7 @@ export class ChildQuestionMissionComponent implements OnInit {
   score = 0;
   started = false;
   loading = false;
+  message: string;
 
   constructor(private questionMissionService: QuestionMissionService,private generateQuestion:GenerateQuestionService,
               private route: ActivatedRoute, private toastr: ToastrService) {
@@ -37,19 +38,6 @@ export class ChildQuestionMissionComponent implements OnInit {
   }
 
   fetchQuestionsFromAI() {
-    // Fake AI response simülasyonu
-    // this.questions = [
-    //   {
-    //     questionText: "5 + 3 kaç eder?",
-    //     options: ["6", "7", "8", "9"],
-    //     correctAnswer: "8"
-    //   },
-    //   {
-    //     questionText: "12 - 4 = ?",
-    //     options: ["6", "7", "8", "9"],
-    //     correctAnswer: "8"
-    //   }
-    // ];
     this.generateQuestion.generateQuestion(this.missionDetails).subscribe({
       next: (result) => {this.questions=result.data;},
       error: (error) => {this.toastr.error(error); }
@@ -80,18 +68,65 @@ export class ChildQuestionMissionComponent implements OnInit {
   }
 
   answer(option: string) {
+    if (this.selectedOption !== null) { // Eğer zaten bir cevap seçilmişse (hızlı tıklamaları önlemek için)
+      return;
+    }
     this.selectedOption = option;
-    const current = this.questions[this.currentQuestionIndex];
-    if (option === current.correctAnswer) {
+    const currentQuestion = this.questions[this.currentQuestionIndex];
+
+    // --- DEBUG LOGLARI ---
+    console.log("--- Cevap Kontrolü ---");
+    console.log("Mevcut Soru Objesi:", JSON.stringify(currentQuestion));
+    console.log("Kullanıcının Seçtiği Seçenek (option):", `"${option}"`);
+    console.log("Sorunun Doğru Cevabı (currentQuestion.correctAnswer):", `"${currentQuestion.correctAnswer}"`);
+    // --- DEBUG LOGLARI BİTİŞ ---
+
+    const correctAnswerText = currentQuestion.options[
+      this.letterToIndex(currentQuestion.correctAnswer)
+      ];
+
+    if (option === correctAnswerText) {
       this.score++;
+      console.log("DOĞRU CEVAP! Yeni Skor:", this.score);
+    } else {
+      console.log("YANLIŞ CEVAP veya Soru/Cevap Tanımsız. Skor Değişmedi:", this.score);
     }
 
+    // Bir sonraki soruya geçmeden önce kısa bir bekleme (görsel geri bildirim için)
     setTimeout(() => {
-      this.selectedOption = null;
-      this.currentQuestionIndex++;
-    }, 500);
+      this.selectedOption = null; // Seçimi temizle
+      if (this.currentQuestionIndex < this.questions.length - 1) {
+        this.currentQuestionIndex++;
+      } else {
+        this.currentQuestionIndex++;// testin bittiğini anlaman için
+        const basariOrani= this.missionDetails.numberOfQuestion*(this.missionDetails.successRate/100)
+        if (this.score>=basariOrani){
+           this.message="Tebrikler istenilen Başarı Oranı İle Çözdünüz."
+          this.questionMissionService.changeMissionStatus(this.missionId).subscribe({
+            next: (result) => {this.toastr.success("Görev Başarıyla Tamamlandı")}
+          })
+        }else{
+           this.message="Üzgünüm İstenilen Başarı Oranından Daha Düşük, Tekrar Deniyebilirsiniz ."
+        }
+      }
+    }, 1000);
   }
   trackFn(index: number, item: any): any {
     return item;
   }
+  letterToIndex(letter: string): number {
+    switch (letter.toUpperCase()) {
+      case 'A': return 0;
+      case 'B': return 1;
+      case 'C': return 2;
+      case 'D': return 3;
+      default: return -1;
+    }
+  }
+  getCorrectAnswerText(): string {
+    const current = this.questions[this.currentQuestionIndex];
+    return current.options[this.letterToIndex(current.correctAnswer)];
+  }
+
+
 }

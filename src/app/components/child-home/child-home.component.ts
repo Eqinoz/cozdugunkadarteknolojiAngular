@@ -88,6 +88,7 @@ export class ChildHomeComponent implements OnInit{
         title:m.schoolLessonName+" Soru Çözümü",
         description:m.description,
         sessionDuration:m.allowedTime,
+        isApproved:m.isApproved,
         type:"question",
         raw:m
       }));
@@ -98,11 +99,12 @@ export class ChildHomeComponent implements OnInit{
           title:m.missionTitle,
           description: m.missionDescription,
           sessionDuration:m.sessionDuration,
+          isApproved:!m.isApproved,
           type:"photo",
           raw:m
 
         }));
-          this.missions=[...photoMissions,...questionMissions];
+          this.missions=[...photoMissions,...questionMissions].filter(m=>m.isApproved);
       })
     })
     }

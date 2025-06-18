@@ -45,7 +45,7 @@ export class ChildRegisterComponent implements  OnInit{
     if (this.childRegisterForm.valid) {
       let childRegisterModel = Object.assign({}, this.childRegisterForm.value);
       this.childRegister.childRegister(childRegisterModel).subscribe({
-       next:data => this.toastr.success("Çocuk Eklendi","Başarılı"),
+       next:data => {this.toastr.success("Çocuk Eklendi","Başarılı");this.childRegisterForm.reset();},
         error: error => console.log(error),
       });
     }

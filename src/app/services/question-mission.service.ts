@@ -26,4 +26,8 @@ apiUrl="https://localhost:44356/api/QuestionMission/"
   getMissionById(id:number):Observable<ListResponseModel<QuestionMissionDTO>>{
   return this.httpClient.get<ListResponseModel<QuestionMissionDTO>>(this.apiUrl+"GetDetailsByMissionId?id="+id);
   }
+
+  changeMissionStatus(id:number):Observable<ResponseModel>{
+  return this.httpClient.get<ResponseModel>(this.apiUrl+"UpdateStatus?id="+id);
+  }
 }
